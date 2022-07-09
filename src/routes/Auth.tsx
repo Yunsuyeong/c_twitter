@@ -3,19 +3,24 @@ import SocialForm from "../components/SocialForm";
 import styled from "styled-components";
 
 const AuthContainer = styled.div`
-    position: relative;
-    top: 50px;
+    width: 100%;
+    height: 100vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    gap: 15px;
 `;
 
 const Auth = () => {
     return (
         <AuthContainer>
             <AuthForm />
+            <div
+                style={{
+                    width: "0.1px",
+                    height: "100vh",
+                    border: "0.01px solid gray",
+                }}
+            ></div>
             <SocialForm />
         </AuthContainer>
     );

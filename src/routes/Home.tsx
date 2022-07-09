@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import NweetForm from "../components/NweetForm";
 import { dbService } from "../fBase";
 import Nweet from "./../components/Nweet";
@@ -13,6 +14,15 @@ interface NweetProps {
     createrId: string;
 }
 
+const NweetsContainer = styled.div`
+    position: relative;
+    top: 10vh;
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+`;
+
 const Home = ({ userObj }: RouterProps) => {
     const [nweets, setNweets] = useState<any>([]);
     useEffect(() => {
@@ -25,8 +35,10 @@ const Home = ({ userObj }: RouterProps) => {
         });
     }, []);
     return (
-        <div>
-            <NweetForm userObj={userObj} />
+        <div style={{ display: "flex" }}>
+            <NweetsContainer>
+                <NweetForm userObj={userObj} />
+            </NweetsContainer>
             <div
                 style={{
                     display: "flex",

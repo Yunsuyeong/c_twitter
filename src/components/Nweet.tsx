@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import { dbService, storageService } from "../fBase";
 
 interface NweetProps {
@@ -6,10 +7,71 @@ interface NweetProps {
     isOwner: boolean;
 }
 
+const Nweets = styled.div`
+    display: flex;
+`;
+
+const NweetEditForm = styled.form`
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+`;
+
+const NweetEditInput = styled.textarea`
+    width: 100%;
+    max-width: 250px;
+    height: 60px;
+    border: none;
+    background-color: transparent;
+    color: whitesmoke;
+    font-size: 12px;
+    ::placeholder {
+        color: whitesmoke;
+        font-weight: bold;
+    }
+`;
+
+const NweetEditSubmit = styled.input`
+    border: none;
+    border-radius: 10px;
+    background-color: #00acee;
+    color: whitesmoke;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+`;
+
+const EditCancelBtn = styled.button`
+    border: none;
+    border-radius: 10px;
+    background-color: #d35400;
+    color: whitesmoke;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+`;
+
+const NweetContainer = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    min-width: 300px;
+    border-radius: 30px;
+    background-color: whitesmoke;
+`;
+
+const NweetText = styled.p`
+    color: black;
+    font-size: 14px;
+    font-weight: 400;
+`;
+
 const Nweet = ({ nweetObj, isOwner }: NweetProps) => {
     const [editing, setEditing] = useState(false);
     const [newNweet, setNewNweet] = useState("");
-    const onChange = (event: React.FormEvent<HTMLInputElement>) => {
+    const onChange = (event: React.FormEvent<HTMLTextAreaElement>) => {
         const {
             currentTarget: { value },
         } = event;
@@ -35,24 +97,26 @@ const Nweet = ({ nweetObj, isOwner }: NweetProps) => {
     };
     const onToggleEdit = () => setEditing((prev) => !prev);
     return (
-        <div>
+        <Nweets>
             {editing ? (
                 <div>
-                    <form onSubmit={onSubmit}>
-                        <input
-                            type="text"
+                    <NweetEditForm onSubmit={onSubmit}>
+                        <NweetEditInput
+                            typeof="text"
                             onChange={onChange}
-                            placeholder="Edit your nweet"
+                            placeholder="수정할 내용을 입력하세요"
                             required
                         />
-                        <input type="submit" value="Update nweet" />
-                        <button onClick={onToggleEdit}>Cancel</button>
-                    </form>
+                        <NweetEditSubmit type="submit" value="수정" />
+                        <EditCancelBtn onClick={onToggleEdit}>
+                            취소
+                        </EditCancelBtn>
+                    </NweetEditForm>
                 </div>
             ) : (
                 <>
-                    <div>
-                        <h4>{nweetObj.text}</h4>
+                    <NweetContainer>
+                        <NweetText>{nweetObj.text}</NweetText>
                         {nweetObj.attachmentUrl && (
                             <img
                                 src={nweetObj.attachmentUrl}
@@ -66,10 +130,10 @@ const Nweet = ({ nweetObj, isOwner }: NweetProps) => {
                                 <button onClick={onToggleEdit}>Edit</button>
                             </div>
                         ) : null}
-                    </div>
+                    </NweetContainer>
                 </>
             )}
-        </div>
+        </Nweets>
     );
 };
 

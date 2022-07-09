@@ -3,7 +3,6 @@ import styled from "styled-components";
 
 const SocialContainer = styled.div`
     position: relative;
-    top: 100px;
     display: flex;
     flex-direction: column;
     justify-content: center;
