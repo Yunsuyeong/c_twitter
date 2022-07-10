@@ -25,6 +25,7 @@ const NweetsContainer = styled.div`
 
 const Home = ({ userObj }: RouterProps) => {
     const [nweets, setNweets] = useState<any>([]);
+    console.log(userObj);
     useEffect(() => {
         dbService.collection("nweets").onSnapshot((snapshot) => {
             const nweetArray = snapshot.docs.map((doc) => ({
@@ -49,6 +50,7 @@ const Home = ({ userObj }: RouterProps) => {
                 {nweets.map((nweet: NweetProps) => (
                     <Nweet
                         key={nweet.id}
+                        userObj={userObj}
                         nweetObj={nweet}
                         isOwner={nweet.createrId === userObj.uid}
                     />

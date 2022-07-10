@@ -25,7 +25,8 @@ const NweetInput = styled.textarea`
 `;
 
 const NweetSubmit = styled.input`
-    margin-right: -170px;
+    padding: 5px;
+    margin-right: -150px;
     border: none;
     border-radius: 10px;
     background-color: #00acee;
@@ -36,6 +37,7 @@ const NweetSubmit = styled.input`
 `;
 
 const FileIcon = styled.svg`
+    margin-left: -150px;
     width: 15px;
     height: 15px;
     cursor: pointer;
