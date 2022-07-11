@@ -4,10 +4,11 @@ import Auth from "../routes/Auth";
 import Edit from "../routes/Edit";
 import Home from "../routes/Home";
 import Profile from "../routes/Profile";
+import { UserObj } from "./App";
 import Navigation from "./Navigation";
 
-interface RouterProps {
-    userObj: any;
+export interface RouterProps {
+    userObj: UserObj | undefined;
     isLoggedIn: boolean;
     refreshUser: any;
 }
@@ -15,7 +16,13 @@ interface RouterProps {
 const AppRouter = ({ userObj, isLoggedIn, refreshUser }: RouterProps) => {
     return (
         <Router>
-            {isLoggedIn && <Navigation userObj={userObj} />}
+            {isLoggedIn && (
+                <Navigation
+                    userObj={userObj}
+                    isLoggedIn={true}
+                    refreshUser={undefined}
+                />
+            )}
             <Switch>
                 {isLoggedIn ? (
                     <>
@@ -26,7 +33,11 @@ const AppRouter = ({ userObj, isLoggedIn, refreshUser }: RouterProps) => {
                             <Profile />
                         </Route>
                         <Route exact path="/profile/edit">
-                            <Edit userObj={userObj} refreshUser={refreshUser} />
+                            <Edit
+                                userObj={userObj}
+                                isLoggedIn={isLoggedIn}
+                                refreshUser={refreshUser}
+                            />
                         </Route>
                     </>
                 ) : (

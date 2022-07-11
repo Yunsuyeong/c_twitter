@@ -2,6 +2,7 @@ import { useState } from "react";
 import { dbService, storageService } from "../fBase";
 import { v4 as uuidv4 } from "uuid";
 import styled from "styled-components";
+import { RouterProps } from "../routes/Home";
 
 const NweetFForm = styled.form`
     display: flex;
@@ -49,7 +50,7 @@ const FileInput = styled.input`
     color: whitesmoke;
 `;
 
-const NweetForm = ({ userObj }: any) => {
+const NweetForm = ({ userObj }: RouterProps) => {
     const [nweet, setNweet] = useState("");
     const [attachment, setAttachment] = useState("");
     const [file, setFile] = useState(false);
@@ -65,7 +66,7 @@ const NweetForm = ({ userObj }: any) => {
         if (attachment !== "") {
             const attachmentRef = storageService
                 .ref()
-                .child(`${userObj.uid}/${uuidv4()}`);
+                .child(`${userObj?.uid}/${uuidv4()}`);
             const response = await attachmentRef.putString(
                 attachment,
                 "data_url"
@@ -73,7 +74,7 @@ const NweetForm = ({ userObj }: any) => {
             attachmentUrl = await response.ref.getDownloadURL();
         }
         const nweetObj = {
-            createrId: userObj.uid,
+            createrId: userObj?.uid,
             text: nweet,
             createdAt: Date.now(),
             attachmentUrl,

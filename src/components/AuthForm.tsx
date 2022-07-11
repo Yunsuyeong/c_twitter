@@ -49,6 +49,7 @@ const AuthSubmit = styled.input`
     border-radius: 10px;
     background-color: transparent;
     color: whitesmoke;
+    font-size: 10px;
     font-weight: bold;
     cursor: pointer;
 `;
@@ -92,7 +93,6 @@ const AuthForm = () => {
                     password
                 );
             }
-            console.log(data);
         } catch (error: any) {
             setError(error.message);
         }

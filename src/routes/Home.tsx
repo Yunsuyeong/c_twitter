@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { nweetObj, UserObj } from "../components/App";
 import NweetForm from "../components/NweetForm";
 import { dbService } from "../fBase";
 import Nweet from "./../components/Nweet";
 
-interface RouterProps {
-    userObj: any;
-}
-
-interface NweetProps {
-    id: string;
-    nweet: string;
-    createrId: string;
+export interface RouterProps {
+    userObj: UserObj | undefined;
 }
 
 const NweetsContainer = styled.div`
@@ -24,8 +19,7 @@ const NweetsContainer = styled.div`
 `;
 
 const Home = ({ userObj }: RouterProps) => {
-    const [nweets, setNweets] = useState<any>([]);
-    console.log(userObj);
+    const [nweets, setNweets] = useState<Array<any>>([]);
     useEffect(() => {
         dbService.collection("nweets").onSnapshot((snapshot) => {
             const nweetArray = snapshot.docs.map((doc) => ({
@@ -47,12 +41,12 @@ const Home = ({ userObj }: RouterProps) => {
                     gap: "15px",
                 }}
             >
-                {nweets.map((nweet: NweetProps) => (
+                {nweets.map((nweet: nweetObj) => (
                     <Nweet
                         key={nweet.id}
                         userObj={userObj}
                         nweetObj={nweet}
-                        isOwner={nweet.createrId === userObj.uid}
+                        isOwner={nweet.createrId === userObj?.uid}
                     />
                 ))}
             </div>

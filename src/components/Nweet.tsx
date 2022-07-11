@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { dbService, storageService } from "../fBase";
+import { nweetObj, UserObj } from "./App";
 
 interface NweetProps {
-    userObj: any;
-    nweetObj: any;
+    userObj: UserObj | undefined;
+    nweetObj: nweetObj | undefined;
     isOwner: boolean;
 }
 
@@ -121,7 +122,7 @@ const Nweet = ({ userObj, nweetObj, isOwner }: NweetProps) => {
     };
     const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        await dbService.doc(`nweets/${nweetObj.id}`).update({
+        await dbService.doc(`nweets/${nweetObj?.id}`).update({
             text: newNweet,
         });
         setEditing(false);
@@ -129,8 +130,8 @@ const Nweet = ({ userObj, nweetObj, isOwner }: NweetProps) => {
     const onDeleteClick = async () => {
         const ok = window.confirm("이 트윗을 지우시겠습니까?");
         if (ok) {
-            await dbService.doc(`nweets/${nweetObj.id}`).delete();
-            if (nweetObj.attachmentUrl) {
+            await dbService.doc(`nweets/${nweetObj?.id}`).delete();
+            if (nweetObj?.attachmentUrl) {
                 await storageService
                     .refFromURL(nweetObj.attachmentUrl)
                     .delete();
@@ -138,11 +139,11 @@ const Nweet = ({ userObj, nweetObj, isOwner }: NweetProps) => {
         }
     };
     const onToggleEdit = () => setEditing((prev) => !prev);
-    const year = new Date(nweetObj.createdAt).getFullYear();
-    const month = new Date(nweetObj.createdAt).getMonth() + 1;
-    const day = new Date(nweetObj.createdAt).getDate();
-    const hour = new Date(nweetObj.createdAt).getHours();
-    const minute = new Date(nweetObj.createdAt).getMinutes();
+    const year = new Date(nweetObj?.createdAt as any).getFullYear();
+    const month = new Date(nweetObj?.createdAt as any).getMonth() + 1;
+    const day = new Date(nweetObj?.createdAt as any).getDate();
+    const hour = new Date(nweetObj?.createdAt as any).getHours();
+    const minute = new Date(nweetObj?.createdAt as any).getMinutes();
     return (
         <Nweets>
             {editing ? (
@@ -171,7 +172,7 @@ const Nweet = ({ userObj, nweetObj, isOwner }: NweetProps) => {
                             }}
                         >
                             <NweetName>
-                                {userObj.displayName} @{userObj.uid}
+                                {userObj?.displayName} @{userObj?.uid}
                             </NweetName>
                             {isOwner ? (
                                 <div>
@@ -187,8 +188,8 @@ const Nweet = ({ userObj, nweetObj, isOwner }: NweetProps) => {
                         <div
                             style={{ display: "flex", flexDirection: "column" }}
                         >
-                            <NweetText>{nweetObj.text}</NweetText>
-                            {nweetObj.attachmentUrl && (
+                            <NweetText>{nweetObj?.text}</NweetText>
+                            {nweetObj?.attachmentUrl && (
                                 <img
                                     src={nweetObj.attachmentUrl}
                                     width="50px"

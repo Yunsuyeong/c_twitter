@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { UserObj } from "./App";
+import { RouterProps } from "./Router";
 
 const NavContainer = styled.div`
     display: flex;
@@ -36,7 +38,7 @@ const UserIcon = styled.svg`
     height: 20px;
 `;
 
-const Navigation = ({ userObj }: any) => {
+const Navigation = ({ userObj }: RouterProps) => {
     return (
         <NavContainer>
             <NavMenu>
@@ -76,7 +78,7 @@ const Navigation = ({ userObj }: any) => {
                         </UserIcon>
                     </Link>
                     <NavDescription>
-                        {userObj.displayName}'s Profile
+                        {userObj?.displayName}'s Profile
                     </NavDescription>
                 </NavItem>
             </NavMenu>

@@ -2,10 +2,18 @@ import { useEffect, useState } from "react";
 import { authService } from "../fBase";
 import AppRouter from "./Router";
 
-interface UserObj {
+export interface UserObj {
     displayName: undefined | null | string;
     uid: undefined | string;
     updateProfile: (args: any) => any;
+}
+
+export interface nweetObj {
+    id: number;
+    attachmentUrl: string | null;
+    createdAt: string | number | Date;
+    createrId: string;
+    text: string;
 }
 
 function App() {
@@ -15,6 +23,7 @@ function App() {
     useEffect(() => {
         authService.onAuthStateChanged((user: any) => {
             if (user) {
+                console.log(user);
                 setIsLoggedIn(true);
                 setUserObj({
                     displayName: user.displayName,

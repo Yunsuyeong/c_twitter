@@ -1,10 +1,14 @@
 import { authService } from "../fBase";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import ProfileForm from "../components/ProfileForm";
+import { useState } from "react";
+import { RouterProps } from "./Home";
 
 const ProfileContainer = styled.div`
     position: relative;
-    top: 10vh;
+    top: 5vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
