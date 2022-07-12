@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/ntwitter/static/css/main.4624d8ca.css",
-    "main.js": "/ntwitter/static/js/main.6c7eb47c.js",
+    "main.js": "/ntwitter/static/js/main.b935bc84.js",
     "index.html": "/ntwitter/index.html",
     "main.4624d8ca.css.map": "/ntwitter/static/css/main.4624d8ca.css.map",
-    "main.6c7eb47c.js.map": "/ntwitter/static/js/main.6c7eb47c.js.map"
+    "main.b935bc84.js.map": "/ntwitter/static/js/main.b935bc84.js.map"
   },
   "entrypoints": [
     "static/css/main.4624d8ca.css",
-    "static/js/main.6c7eb47c.js"
+    "static/js/main.b935bc84.js"
   ]
 }
