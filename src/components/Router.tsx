@@ -15,7 +15,7 @@ export interface RouterProps {
 
 const AppRouter = ({ userObj, isLoggedIn, refreshUser }: RouterProps) => {
     return (
-        <Router>
+        <Router basename="/">
             {isLoggedIn && (
                 <Navigation
                     userObj={userObj}
