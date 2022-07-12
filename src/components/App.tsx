@@ -5,6 +5,7 @@ import AppRouter from "./Router";
 export interface UserObj {
     displayName: undefined | null | string;
     uid: undefined | string;
+    email: undefined | null | string;
     updateProfile: (args: any) => any;
 }
 
@@ -28,6 +29,7 @@ function App() {
                 setUserObj({
                     displayName: user.displayName,
                     uid: user.uid,
+                    email: user.email,
                     updateProfile: (args: any) => user.updateProfile(args),
                 });
                 if (user.displayName === null) {
@@ -45,6 +47,7 @@ function App() {
         setUserObj({
             displayName: user?.displayName,
             uid: user?.uid,
+            email: user?.email,
             updateProfile: (args) => user?.updateProfile(args),
         });
     };

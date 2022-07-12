@@ -172,10 +172,16 @@ const Nweet = ({ userObj, nweetObj, isOwner }: NweetProps) => {
                             }}
                         >
                             <NweetName>
-                                {userObj?.displayName} @{userObj?.uid}
+                                {userObj?.displayName} @
+                                {userObj?.email?.split("@")[0]}
                             </NweetName>
                             {isOwner ? (
-                                <div>
+                                <div
+                                    style={{
+                                        position: "relative",
+                                        left: "100px",
+                                    }}
+                                >
                                     <NweetDeleteBtn onClick={onDeleteClick}>
                                         삭제
                                     </NweetDeleteBtn>
